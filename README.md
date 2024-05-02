@@ -112,3 +112,13 @@ MQ is using block storage, adapt the configuration file accordingly.
 Yaml file to apply: 
 - MQ Configuration: 88-1-MQ-mainmqm-cm.yaml
 - MQ Installation: 88-2-MQ-mainmqm-cr.yaml 
+
+
+# API Connect configuration
+
+## Dummy mail server
+
+```shell
+oc -n cp4i new-app mailhog/mailhog
+oc -n cp4i expose svc/mailhog --port=8025 --name=mailhog
+```
