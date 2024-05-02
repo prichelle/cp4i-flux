@@ -1,5 +1,8 @@
 # cp4i-rosa
 
+Installation of the CP4I in the cp4i namespace.
+The installation will be scoped to this namespace.
+
 # 1. Set default storage
 
 On the ebs class storage
@@ -57,13 +60,15 @@ Verify operators are well started (especially RHOCP Keycloak)
 -> install operator postgres: postgresql-operator-controller-manager-xxxx
 -> install keycloak
 
-user
-oc -n cp4i get secret integration-admin-initial-temporary-credentials -o jsonpath={.data.username} | base64 -d
-pwd
-oc -n cp4i get secret integration-admin-initial-temporary-credentials -o jsonpath={.data.password} | base64 -d
-host
-oc -n cp4i get platformnavigator cp4i-navigator -o jsonpath='{range .status.endpoints[?(@.name=="navigator")]}{.uri}{end}'
 
+```shell
+#user
+oc -n cp4i get secret integration-admin-initial-temporary-credentials -o jsonpath={.data.username} | base64 -d
+#pwd
+oc -n cp4i get secret integration-admin-initial-temporary-credentials -o jsonpath={.data.password} | base64 -d
+#host
+oc -n cp4i get platformnavigator cp4i-navigator -o jsonpath='{range .status.endpoints[?(@.name=="navigator")]}{.uri}{end}'
+```
 
 ## 6.2 Install ACE
 Install Dashboard 
@@ -73,14 +78,16 @@ Install Designer
 ## 6.3 Install APIC cluster
 06-3-apic-inst.yaml
 
-host gtw
+```shell
+#host gtw
 oc -n cp4i get GatewayCluster -o=jsonpath='{.items[?(@.kind=="GatewayCluster")].status.endpoints[?(@.name=="gateway")].uri}'
-host cloud admin
+#host cloud admin
 oc -n cp4i get APIConnectCluster -o=jsonpath='{.items[?(@.kind=="APIConnectCluster")].status.endpoints[?(@.name=="admin")].uri}'
-host manager
+#host manager
 oc -n cp4i get ManagementCluster -o=jsonpath='{.items[?(@.kind=="ManagementCluster")].spec.adminUser.secretName}'
-host portal
+#host portal
 oc -n $MY_APIC_PROJECT get PortalCluster -o=jsonpath='{.items[?(@.kind=="PortalCluster")].status.endpoints[?(@.name=="portalWeb")].uri}'
+```
 ## 6.4 Install AssetRepo
 
 
