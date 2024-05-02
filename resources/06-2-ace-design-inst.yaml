@@ -1,0 +1,29 @@
+apiVersion: appconnect.ibm.com/v1beta1
+kind: DesignerAuthoring
+metadata:
+  name: ace-designer
+  namespace: cp4i
+spec:
+  authentication:
+    integrationKeycloak:
+      enabled: true
+  authorization:
+    integrationKeycloak:
+      enabled: true
+  couchdb:
+    replicas: 1
+    storage:
+      class: ocs-storagecluster-ceph-rbd
+      size: 10Gi
+      type: persistent-claim
+  designerFlowsOperationMode: local
+  designerMappingAssist:
+    enabled: true
+    incrementalLearning:
+      schedule: Every 15 days
+  license:
+    accept: true
+    license: L-KZVS-2G3FW4
+    use: AppConnectEnterpriseNonProduction
+  replicas: 1
+  version: 12.0.11.3-r1
