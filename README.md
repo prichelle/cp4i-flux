@@ -12,7 +12,9 @@ metadata:
     storageclass.kubernetes.io/is-default-class: "true"
 ```
 [Supported storage matrix](https://www.ibm.com/docs/en/cloud-paks/cp-integration/2023.4?topic=cloud-supported-options-amazon-web-services-aws)
-# 2. Check Cert manager setup
+
+
+# 2. Cert Manager setup
 
 Optionally
 ``` shell
@@ -25,20 +27,26 @@ oc apply -f resources/00-cert-manager-subscription.yaml
 Install catalog source for all operators
 [CatalogSource](https://www.ibm.com/docs/en/cloud-paks/cp-integration/2023.4?topic=images-adding-catalog-sources-cluster#ibm-catalog)
 
+03-1-CatalogSource.yaml
+
 # 4. Install Operators
 
-Foundational Service: 04-1-CPFoundationalService.yaml
+- **Foundational Service**: 04-1-CPFoundationalService.yaml
 -> Install common service operator
 -> Install ODLM operator
-oc -n cp4i patch commonservice common-service --type merge -p '{"spec": {"license": {"accept": true}}}'
 
-Platform Navigator: 04-2-pn-subs.yaml
+Patch the common service to accept the license:
+```shell
+oc -n cp4i patch commonservice common-service --type merge -p '{"spec": {"license": {"accept": true}}}'
+```
+
+- **Platform Navigator**: 04-2-pn-subs.yaml
 --> install the integration platform navigator operator
 
-Asset Repo: 04-3-asset-repo-subs.yaml
-API Connect: 04-4-api-connect-subs.yaml
-APP Connect: 04-5-app-connect-subs.yaml
-MQ: 04-6-mq-subs.yaml
+- **Asset Repo**: 04-3-asset-repo-subs.yaml
+- **API Connect**: 04-4-api-connect-subs.yaml
+- **APP Connect**: 04-5-app-connect-subs.yaml
+- **MQ**: 04-6-mq-subs.yaml
 
 # 5. Create entitlement registry key
 ```shell
@@ -52,7 +60,7 @@ oc create secret docker-registry ibm-entitlement-key \
 ```
 
 # 6. Install Software
-## 6.1 Install PN
+## 6.1 Install platform navigator (pn)
 Verify operators are well started (especially RHOCP Keycloak)
 06-1-pn-inst.yaml
 -> install operator: rhbk-operator-xxxx
@@ -71,12 +79,17 @@ oc -n cp4i get platformnavigator cp4i-navigator -o jsonpath='{range .status.endp
 ```
 
 ## 6.2 Install ACE
-Install Dashboard 
-06-2-ace-dash-inst.yaml
-Install Designer
-06-2-ace-design-inst.yaml
+- Install Dashboard 
+  Dashboard is using a RWX storage class. Update the value accordingly to your configuration.  
+  Yaml file to apply: 06-2-ace-dash-inst.yaml
+- Install Designer
+  Designer is using a RWO (block) storage. Update the value of the couchDb storage accordingly.  
+  The AI incremental model can be optionally stored on a RWX storage (EFS or S3). Not needed for this deployment.  
+  Yaml file to apply: 06-2-ace-design-inst.yaml
 ## 6.3 Install APIC cluster
-06-3-apic-inst.yaml
+
+APIC is using block storage, adapt the configuration file accordingly.  
+Yaml file to apply: 06-3-apic-inst.yaml
 
 ```shell
 #host gtw
@@ -90,4 +103,12 @@ oc -n $MY_APIC_PROJECT get PortalCluster -o=jsonpath='{.items[?(@.kind=="PortalC
 ```
 ## 6.4 Install AssetRepo
 
+Asset repo is using block storage, adapt the configuration file accordingly.  
+Yaml file to apply: 06-6-asset-repo-ai-inst.yaml
 
+## 6.5 Install MQ
+
+MQ is using block storage, adapt the configuration file accordingly.  
+Yaml file to apply: 
+- MQ Configuration: 88-1-MQ-mainmqm-cm.yaml
+- MQ Installation: 88-2-MQ-mainmqm-cr.yaml 
