@@ -1,4 +1,4 @@
-# cp4i-rosa
+# cp4i-rosa & CP4BA
 
 Installation of the CP4I in the cp4i namespace.
 The installation will be scoped to this namespace.
