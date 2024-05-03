@@ -122,3 +122,5 @@ Yaml file to apply:
 oc -n cp4i new-app mailhog/mailhog
 oc -n cp4i expose svc/mailhog --port=8025 --name=mailhog
 ```
+
+## Configure 
