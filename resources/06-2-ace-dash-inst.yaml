@@ -14,7 +14,7 @@ spec:
   license:
     accept: true
     license: L-KZVS-2G3FW4
-    use: AppConnectEnterpriseNonProduction
+    use: CloudPakForIntegrationNonProduction
   pod:
     containers:
       content-server:
