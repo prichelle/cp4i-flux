@@ -17,7 +17,7 @@ spec:
   sourceRef:
     kind: GitRepository
     name: flux-system
-  path: ./kustomize/operators/cloudpak-integration
+  path: ./kustomize/operators/ibm-platform-navigator
   prune: true
   # decryption:
     # provider: sops
