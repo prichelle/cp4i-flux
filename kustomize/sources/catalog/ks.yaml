@@ -10,7 +10,7 @@ spec:
   sourceRef:
     kind: GitRepository
     name: flux-system
-  path: "./sources/catalog" 
+  path: ./kustomize/sources/catalog 
   prune: true
   # decryption:
     # provider: sops
