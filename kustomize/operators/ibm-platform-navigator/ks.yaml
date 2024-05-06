@@ -1,0 +1,25 @@
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: ibm-platform-navigator
+  namespace: flux-system
+spec:
+  dependsOn:
+  - name: operator-common-service
+  interval: 1h
+  retryInterval: 1m
+  timeout: 5m
+  healthChecks:
+    - apiVersion: apps/v1
+      kind: Deployment
+      name: ibm-integration-platform-navigator-operator
+      namespace: cp4i
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+  path: ./kustomize/operators/cloudpak-integration
+  prune: true
+  # decryption:
+    # provider: sops
+    # secretRef:
+      # name: sops-hcvault

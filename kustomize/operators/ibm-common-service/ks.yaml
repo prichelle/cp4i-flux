@@ -1,0 +1,29 @@
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: operator-common-service
+  namespace: flux-system
+spec:
+  dependsOn:
+  - name: catalog-sources
+  interval: 1h
+  retryInterval: 1m
+  timeout: 5m
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+  path: ./kustomize/operators/ibm-common-service
+  prune: true
+  healthChecks:
+    - apiVersion: apps/v1
+      kind: Deployment
+      name: operand-deployment-lifecycle-manager
+      namespace: cp4i
+    - apiVersion: apps/v1
+      kind: Deployment
+      name: ibm-common-service-operator
+      namespace: cp4i
+  # decryption:
+    # provider: sops
+    # secretRef:
+      # name: sops-hcvault
