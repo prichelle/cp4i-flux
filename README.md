@@ -31,16 +31,16 @@ Install catalog source for all operators
 
 # 4. Install Operators
 
-- **Foundational Service**: 04-1-CPFoundationalService.yaml
--> Install common service operator
--> Install ODLM operator
+- **Foundational Service**: 04-1-CPFoundationalService.yaml   
+-> Install common service operator   
+-> Install ODLM operator   
 
 Patch the common service to accept the license:
 ```shell
 oc -n cp4i patch commonservice common-service --type merge -p '{"spec": {"license": {"accept": true}}}'
 ```
 
-- **Platform Navigator**: 04-2-pn-subs.yaml
+- **Platform Navigator**: 04-2-pn-subs.yaml  
 --> install the integration platform navigator operator
 
 - **Asset Repo**: 04-3-asset-repo-subs.yaml
@@ -124,3 +124,22 @@ oc -n cp4i expose svc/mailhog --port=8025 --name=mailhog
 ```
 
 ## Configure 
+
+# Uninstall PN
+
+oc delete pn cp4i-navigator
+
+```
+c328aaa28a153afc8d2766acc4c73f81cf5e98aa2dc24fa9d94f28661cvhvpf   0/1     Completed   0               5d12h
+cp4i-navigator-ibm-integration-platform-navigator-deploymewkxlp   2/2     Running     0               5d12h
+create-postgres-license-config-6j6jz                              0/1     Completed   0               5d12h
+cs-cloudpak-realm-2jfpx                                           0/1     Completed   0               5d12h
+cs-keycloak-0                                                     1/1     Running     0               5d12h
+ibm-common-service-operator-565b97647d-h4nx6                      1/1     Running     0               5d13h
+ibm-integration-platform-navigator-operator-7fdcfb78f-twv86       1/1     Running     0               5d12h
+integration-ibm-cloud-native-postgresql-cbbsb                     1/1     Running     0               5d12h
+keycloak-edb-cluster-1                                            1/1     Running     0               5d12h
+operand-deployment-lifecycle-manager-854dfcd546-dzzc5             1/1     Running     0               5d13h
+postgresql-operator-controller-manager-1-18-7-764b8b4ddf-n6vkc    1/1     Running     0               5d12h
+rhbk-operator-6d86496885-74gb2                                    1/1     Running     0               5d12h
+```
