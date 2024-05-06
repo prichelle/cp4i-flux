@@ -9,14 +9,14 @@ spec:
   interval: 1h
   retryInterval: 1m
   healthChecks:
-#   - apiVersion: apps/v1
-#      kind: Deployment
-#      name: cp4i-navigator-ibm-integration-platform-navigator-deployment
+  - apiVersion: apps/v1
+    kind: Deployment
+    name: cp4i-navigator-ibm-integration-platform-navigator-deployment
+    namespace: cp4i
+#    - apiVersion: apps/v1
+#      kind: PlatformNavigator
+#      name: cp4i-navigator
 #      namespace: cp4i
-    - apiVersion: apps/v1
-      kind: PlatformNavigator
-      name: cp4i-navigator
-      namespace: cp4i
   timeout: 5m
   sourceRef:
     kind: GitRepository
