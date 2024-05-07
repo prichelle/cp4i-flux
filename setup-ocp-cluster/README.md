@@ -16,8 +16,11 @@ The bootstrap will generate everything on the cluster and on the git
 
 - git pull to get the cluster configuration
 
-- update the patches of the kustomization (in cluster path)
+- update the patches of the kustomization yaml file (in cluster path)
 
+- Create the cp4i ns and the entitlement key in the cp4i
+
+- Add in the cluster folder the required installation. Example available in ./kustomize/cluster-config
 
 
 
