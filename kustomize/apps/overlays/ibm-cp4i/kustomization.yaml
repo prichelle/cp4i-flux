@@ -3,7 +3,7 @@ kind: Kustomization
 resources: 
 - ../../ibm/platform-nav/ks.yaml
 - ../../ibm/api-connect/ks.yaml
-#- ../../ibm/app-connect/ks.yaml
-#- ../../ibm/asset-repo/ks.yaml
-#- ../../ibm/mq/ks.yaml
+- ../../ibm/app-connect/ks.yaml
+- ../../ibm/asset-repo/ks.yaml
+- ../../ibm/mq/ks.yaml
 
