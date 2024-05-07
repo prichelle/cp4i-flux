@@ -1,10 +1,7 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources: 
-#TODO test - ../../cert-manager/ks.yaml
-#TODO test - ../../datadog/ks.yaml
-#TODO test - ../../efs-csi/ks.yaml
+- ../../cert-manager/ks.yaml
 - ../../ibm-common-service/ks.yaml
 - ../../ibm-platform-navigator/ks.yaml
-#TODO remove - ../../keycloak/ks.yaml
 - ../../ibm-integration/ks.yaml
