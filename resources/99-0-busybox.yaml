@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: busybox
+  namespace: cp4i
+spec:
+  nodeName: ip-10-0-142-114.eu-central-1.compute.internal
+  securityContext:
+    runAsUser: 1000
+    runAsGroup: 1000
+    seccompProfile:
+      type: RuntimeDefault
+  containers:
+    - name: "curl"
+      image: "governmentpaas/curl-ssl"
+      command: ["/bin/sh", "-c", "--"]
+      args: ["while true; do sleep 30; done;"]
+      securityContext:
+        runAsNonRoot: true
+        allowPrivilegeEscalation: false
