@@ -26,10 +26,10 @@ spec:
       admin: {}
     cloudManagerEndpoint: {}
     testAndMonitor:
-      autoTestEnabled: true
-      enabled: true
-      hubEndpoint: {}
-      turnstileEndpoint: {}
+      autoTestEnabled: false
+      enabled: false
+#      hubEndpoint: {}
+#      turnstileEndpoint: {}
     consumerAPIEndpoint: {}
     platformAPIEndpoint: {}
     databaseBackup: {}
