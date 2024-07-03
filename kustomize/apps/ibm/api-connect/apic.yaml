@@ -6,8 +6,8 @@ metadata:
   labels:
     app.kubernetes.io/instance: apiconnect
     app.kubernetes.io/managed-by: ibm-apiconnect
-    app.kubernetes.io/name: apic-poc
-  name: apic-poc
+    app.kubernetes.io/name: apic-min
+  name: apic-min
   namespace: cp4i
 spec:
   license:
@@ -16,37 +16,19 @@ spec:
     metric: VIRTUAL_PROCESSOR_CORE
     use: nonproduction
   management:
-    governance:
-      enabled: true
-    analytics:
-      client: {}
-      ingestion: {}
-    apiManagerEndpoint: {}
-    portal:
-      admin: {}
-    cloudManagerEndpoint: {}
+#    governance:
+#      enabled: true
     testAndMonitor:
       autoTestEnabled: false
       enabled: false
-#      hubEndpoint: {}
-#      turnstileEndpoint: {}
-    consumerAPIEndpoint: {}
-    platformAPIEndpoint: {}
-    databaseBackup: {}
-    originalUID: ''
   imagePullSecrets:
     - ibm-entitlement-key
   gateway:
-    adminUser: {}
-    apicGatewayPeeringTLS: {}
-    apicGatewayServiceTLS: {}
-    gatewayEndpoint: {}
-    gatewayManagerEndpoint: {}
     webGUIManagementEnabled: true
-  analytics:
-    storage:
-      enabled: true
-      type: shared
+#  analytics:
+#    storage:
+#      enabled: true
+#      type: shared
   storageClassName: gp3-csi
   profile: n1xc7.m48
   version: 10.0.7.0-5560
