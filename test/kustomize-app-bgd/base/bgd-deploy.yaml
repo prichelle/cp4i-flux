@@ -21,6 +21,8 @@ spec:
       - image: quay.io/redhatworkshops/bgd:latest
         name: bgd
         env:
+        - name: TEST
+          value: "dummy"
         - name: COLOR
           value: "blue"
         resources: {}
