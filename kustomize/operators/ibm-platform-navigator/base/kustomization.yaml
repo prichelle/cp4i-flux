@@ -1,0 +1,19 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: openshift-operators
+resources: 
+- license.yaml
+- sub.yaml
+patches:
+- patch: |-
+    - op: replace
+      path: /spec/channel
+      value: v7.3-sc2
+    - op: replace
+      path: /spec/startingCSV
+      value: ibm-integration-platform-navigator.v7.3.0   
+  target:
+    group: operators.coreos.com
+    kind: Subscription
+    name: ibm-integration-platform-navigator
+    version: v1alpha1

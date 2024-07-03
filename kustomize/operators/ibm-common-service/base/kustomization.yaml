@@ -1,0 +1,18 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: openshift-operators
+resources: 
+- sub.yaml
+patches:
+- patch: |-
+    - op: replace
+      path: /spec/channel
+      value: v4.6
+    - op: replace
+      path: /spec/startingCSV
+      value: ibm-common-service-operator.v4.6.3    
+  target:
+    group: operators.coreos.com
+    kind: Subscription
+    name: ibm-common-service-operator
+    version: v1alpha1

@@ -12,9 +12,5 @@ spec:
   sourceRef:
     kind: GitRepository
     name: flux-system
-  path: ./kustomize/operators/overlays/ibm-cp4i
+  path: ./kustomize/operators/overlays
   prune: true
-  # decryption:
-    # provider: sops
-    # secretRef:
-      # name: sops-hcvault

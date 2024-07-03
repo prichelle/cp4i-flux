@@ -13,13 +13,9 @@ spec:
     - apiVersion: apps/v1
       kind: Deployment
       name: ibm-integration-platform-navigator-operator
-      namespace: cp4i
+      namespace: openshift-operators      # namespace: ${CP4I_NS}
   sourceRef:
     kind: GitRepository
     name: flux-system
-  path: ./kustomize/operators/ibm-platform-navigator
+  path: ./kustomize/operators/ibm-platform-navigator/base
   prune: true
-  # decryption:
-    # provider: sops
-    # secretRef:
-      # name: sops-hcvault

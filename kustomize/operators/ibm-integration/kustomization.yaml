@@ -1,5 +1,45 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
+namespace: openshift-operators
 resources: 
 #- license.yaml
-- sub.yaml
+- sub-mq.yaml
+- sub-ace.yaml
+- sub-apic.yaml
+patches:
+- patch: |-
+    - op: replace
+      path: /spec/channel
+      value: v5.2-sc2
+    - op: replace
+      path: /spec/startingCSV
+      value: ibm-apiconnect.v5.1.0   
+  target:
+    group: operators.coreos.com
+    kind: Subscription
+    name: ibm-apiconnect
+    version: v1alpha1
+- patch: |-
+    - op: replace
+      path: /spec/channel
+      value: v12.1
+    - op: replace
+      path: /spec/startingCSV
+      value: ibm-appconnect.v12.1.1   
+  target:
+    group: operators.coreos.com
+    kind: Subscription
+    name: ibm-appconnect
+    version: v1alpha1
+- patch: |-
+    - op: replace
+      path: /spec/channel
+      value: v3.2-sc2
+    - op: replace
+      path: /spec/startingCSV
+      value: ibm-mq.v3.2.1   
+  target:
+    group: operators.coreos.com
+    kind: Subscription
+    name: ibm-mq
+    version: v1alpha1

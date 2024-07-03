@@ -12,18 +12,15 @@ spec:
   sourceRef:
     kind: GitRepository
     name: flux-system
-  path: ./kustomize/operators/ibm-common-service
+  path: ./kustomize/operators/ibm-common-service/base
   prune: true
   healthChecks:
     - apiVersion: apps/v1
       kind: Deployment
       name: operand-deployment-lifecycle-manager
-      namespace: cp4i
+      namespace: openshift-operators
+      # namespace: ${CP4I_NS}
     - apiVersion: apps/v1
       kind: Deployment
       name: ibm-common-service-operator
-      namespace: cp4i
-  # decryption:
-    # provider: sops
-    # secretRef:
-      # name: sops-hcvault
+      namespace: openshift-operators      # namespace: ${CP4I_NS}

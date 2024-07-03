@@ -12,7 +12,3 @@ spec:
     name: flux-system
   path: ./kustomize/sources/catalog 
   prune: true
-  # decryption:
-    # provider: sops
-    # secretRef:
-      # name: sops-hcvault
