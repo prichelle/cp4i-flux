@@ -1,15 +1,15 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: bgd-app
+  name: bgdk-app
   namespace: openshift-gitops
 spec:
   destination:
-    namespace: bgd
+    namespace: bgdk
     server: https://kubernetes.default.svc 
   project: default 
   source: 
-    path: test/bgd-app
+    path: test/kustomize-app-bgd/overlays
     repoURL: https://github.com/prichelle/cp4i-rosa
     targetRevision: main
   syncPolicy: 
