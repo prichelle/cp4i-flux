@@ -11,9 +11,6 @@ patches:
     - op: replace
       path: /spec/channel
       value: v5.2-sc2
-    - op: replace
-      path: /spec/startingCSV
-      value: ibm-apiconnect.v5.1.0   
   target:
     group: operators.coreos.com
     kind: Subscription
