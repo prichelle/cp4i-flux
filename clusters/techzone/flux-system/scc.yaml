@@ -41,3 +41,6 @@ subjects:
   - kind: ServiceAccount
     name: image-automation-controller
     namespace: flux-system
+  - kind: ServiceAccount
+    name: ww-gitops-weave-gitops
+    namespace: flux-system
