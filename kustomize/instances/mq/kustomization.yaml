@@ -15,11 +15,3 @@ patches:
     kind: QueueManager
     name: mainmqm
     version: v1beta1
-vars:
-  - name: CP4I_LICENSE
-    objref:
-      kind: ConfigMap
-      name: global-config
-      apiVersion: v1
-    fieldref:
-      fieldpath: data.cp4iLicense
