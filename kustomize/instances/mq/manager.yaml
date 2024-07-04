@@ -32,11 +32,11 @@ spec:
       type: NativeHA
       updateStrategy: RollingUpdate
     storage:
-      defaultClass: gp3-csi
+      defaultClass: ocs-storagecluster-ceph-rbd
       persistedData:
         enabled: false
       queueManager:
-        class: gp3-csi
+        class: ocs-storagecluster-ceph-rbd
         size: 2Gi
         type: persistent-claim
   version: 9.3.4.0-r1
