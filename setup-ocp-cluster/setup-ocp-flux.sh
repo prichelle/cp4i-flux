@@ -14,3 +14,5 @@ FLUX_CONTROLLERS=(
 for i in ${!FLUX_CONTROLLERS[@]}; do
   oc adm policy add-scc-to-user nonroot system:serviceaccount:${FLUX_NAMESPACE}:${FLUX_CONTROLLERS[$i]}
 done
+
+# done in yaml oc adm policy add-cluster-role-to-user cluster-admin -z ww-gitops-weave-gitops -n flux-system

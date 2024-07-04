@@ -6,6 +6,8 @@ resources:
 - sub-mq.yaml
 - sub-ace.yaml
 - sub-apic.yaml
+- sub-es.yaml
+- sub-eem.yaml
 patches:
 - patch: |-
     - op: replace
@@ -39,4 +41,22 @@ patches:
     group: operators.coreos.com
     kind: Subscription
     name: ibm-mq
+    version: v1alpha1
+- patch: |-
+    - op: replace
+      path: /spec/channel
+      value: v3.4
+  target:
+    group: operators.coreos.com
+    kind: Subscription
+    name: ibm-eventstreams
+    version: v1alpha1
+- patch: |-
+    - op: replace
+      path: /spec/channel
+      value: v11.2 
+  target:
+    group: operators.coreos.com
+    kind: Subscription
+    name: ibm-eventendpointmanagement
     version: v1alpha1

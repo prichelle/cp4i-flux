@@ -1,63 +1,48 @@
-# CP4I-Rosa & CP4BA
+# CP4I install 
 
-Installation of the CP4I in the cp4i namespace.
-The installation will be scoped to this namespace.
+# Setup
 
-# 1. Set default storage
+1. Create the OpenShift cluster in techZone
+2. clone the repo or fork. If clone, you will need to push it back to your own repository. This is because flux needs to access the repo for read/write.
+3. Install flux as described at [flux installation](https://fluxcd.io/flux/installation/)
+4. Get access token for your git repo. This can be done following the steps at [github](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens#creating-a-fine-grained-personal-access-token)
+5. Define an environment variable having the credentials that flow will use to access your github repo
+export GITHUB_TOKEN=<your-token>
+export GITHUB_USER=<your-username>
+6. log into the cluster uisng `oc login`
+7. You can now bootstrap the cluster. This command will create in your cluster a ns "flux-system" which will connect to your repo and install the CP4I using Kustomization
 
-On the ebs class storage
-```yaml
-metadata:
-  annotations:
-    storageclass.kubernetes.io/is-default-class: "true"
-```
-[Supported storage matrix](https://www.ibm.com/docs/en/cloud-paks/cp-integration/2023.4?topic=cloud-supported-options-amazon-web-services-aws)
-
-
-# 2. Cert Manager setup
-
-Optionally
-``` shell
-oc apply -f resources/00-cert-manager-namespace.yaml
-oc apply -f resources/00-cert-manager-operatorgroup.yaml
-oc apply -f resources/00-cert-manager-subscription.yaml
-```
-
-# 3. Catalog Source
-Install catalog source for all operators
-[CatalogSource](https://www.ibm.com/docs/en/cloud-paks/cp-integration/2023.4?topic=images-adding-catalog-sources-cluster#ibm-catalog)
-
-03-1-CatalogSource.yaml
-
-# 4. Install Operators
-
-- **Foundational Service**: 04-1-CPFoundationalService.yaml   
--> Install common service operator   
--> Install ODLM operator   
-
-Patch the common service to accept the license:
 ```shell
-oc -n cp4i patch commonservice common-service --type merge -p '{"spec": {"license": {"accept": true}}}'
+flux bootstrap github --owner=$GITHUB_USER --repository=$YOUR_REPO --branch=main --path=./clusters/techzone
 ```
+8. You can pull the update made by flux
 
-- **Platform Navigator**: 04-2-pn-subs.yaml  
---> install the integration platform navigator operator
+x.2 options
+x.1 entitlement keys
 
-- **Asset Repo**: 04-3-asset-repo-subs.yaml
-- **API Connect**: 04-4-api-connect-subs.yaml
-- **APP Connect**: 04-5-app-connect-subs.yaml
-- **MQ**: 04-6-mq-subs.yaml
 
-# 5. Create entitlement registry key
+# Additional informations
+## create entitlement keys
+
+
 ```shell
 export ENT_KEY=<your_key>
-
 oc create secret docker-registry ibm-entitlement-key \
         --docker-username=cp \
         --docker-password=$ENT_KEY \
         --docker-server=cp.icr.io \
         --namespace=$NS
 ```
+
+
+x.1 Create secret for key entitlement
+
+- Create the cp4i ns and the entitlement key in the cp4i
+
+- Add in the cluster folder the required installation. Example available in ./kustomize/cluster-config
+
+
+# 5. Create entitlement registry key
 
 # 6. Install Software
 ## 6.1 Install platform navigator (pn)

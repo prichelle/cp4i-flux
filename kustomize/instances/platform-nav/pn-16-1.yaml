@@ -1,0 +1,11 @@
+apiVersion: integration.ibm.com/v1beta1
+kind: PlatformNavigator
+metadata:
+  name: cp4i-navigator
+  namespace: cp4i
+spec:
+  license:
+    accept: true
+    license: $(CP4I_LICENSE)
+  replicas: 1
+  version: 16.1.0

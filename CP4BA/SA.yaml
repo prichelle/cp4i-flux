@@ -1,6 +1,0 @@
-apiVersion: v1
-kind: ServiceAccount
-metadata:
-  name: ibm-cp4ba-anyuid
-imagePullSecrets:
-  - name: "ibm-entitlement-key"

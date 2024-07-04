@@ -1,0 +1,49 @@
+apiVersion: mq.ibm.com/v1beta1
+kind: QueueManager
+metadata:
+  name: mainmqm
+  namespace: ace
+spec:
+  license:
+    accept: true
+    license: $(CP4I_LICENSE)
+    metric: VirtualProcessorCore
+    use: NonProduction
+  queueManager:
+    metrics:
+      enabled: true
+    resources:
+      limits:
+        cpu: 500m
+        memory: 1Gi
+      requests:
+        cpu: 500m
+        memory: 1Gi
+    route:
+      enabled: true
+    name: mainmqm
+    mqsc:
+      - configMap:
+          items:
+            - mainmqm.mqsc
+          name: mainmqm-mqsc
+    logFormat: Basic
+    availability:
+      type: NativeHA
+      updateStrategy: RollingUpdate
+    storage:
+      defaultClass: gp3-csi
+      persistedData:
+        enabled: false
+      queueManager:
+        class: gp3-csi
+        size: 2Gi
+        type: persistent-claim
+  version: 9.3.4.0-r1
+  web:
+    console:
+      authentication:
+        provider: integration-keycloak
+      authorization:
+        provider: integration-keycloak
+    enabled: true
