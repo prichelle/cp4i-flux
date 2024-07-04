@@ -3,6 +3,7 @@ kind: Kustomization
 namespace: openshift-operators
 resources: 
 - sub.yaml
+- ns.yaml
 patches:
 - patch: |-
     - op: replace
