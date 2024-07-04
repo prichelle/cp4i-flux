@@ -12,3 +12,6 @@ vars:
       apiVersion: v1
     fieldref:
       fieldpath: data.cp4iLicense
+varReference:
+  - path: spec/license/license
+    kind: PlatformNavigator
