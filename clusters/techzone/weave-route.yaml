@@ -1,0 +1,12 @@
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  name: gitops
+  namespace: flux-system
+spec:
+  port:
+    targetPort: 9001
+  to:
+    kind: Service
+    name: ww-gitops-weave-gitops
+    weight: 100
