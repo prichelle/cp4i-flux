@@ -10,6 +10,21 @@
 export GITHUB_TOKEN=<your-token>
 export GITHUB_USER=<your-username>
 6. log into the cluster uisng `oc login`
+7. create the entitlement key in the default repo
+
+The key will be copied from default in the required ns.
+[Entitlement keys](https://myibm.ibm.com/products-services/containerlibrary)
+```shell
+export ENT_KEY=<your_key>
+
+oc create secret docker-registry ibm-entitlement-key \
+        --docker-username=cp \
+        --docker-password=$ENT_KEY \
+        --docker-server=cp.icr.io \
+        --namespace=default
+
+```
+
 7. You can now bootstrap the cluster. This command will create in your cluster a ns "flux-system" which will connect to your repo and install the CP4I using Kustomization
 
 ```shell

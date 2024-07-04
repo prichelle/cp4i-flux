@@ -43,3 +43,23 @@ data:
     echo "Deployment is ready. Running curl command..."
     curl -X POST http://my-application.default.svc.cluster.local/configure
 ```
+
+Job 
+```yaml
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: prepare-entitlement
+spec:
+  template:
+    spec:
+      containers:
+      - name: copy-key
+        image: bitnami/kubectl:latest
+        command: ["/bin/sh", "-c"]
+        args:
+          - |
+            kubectl get secret ibm-entitlement-key -n default -o yaml | sed 's/default/ace/g' | kubectl create -n ace -f - 
+            echo "key created!"
+      restartPolicy: Never
+```
