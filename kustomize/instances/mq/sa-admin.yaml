@@ -2,4 +2,4 @@ apiVersion: v1
 kind: ServiceAccount
 metadata:
   name: admin-sa
-  namespace: cp4i
+  namespace: ace
