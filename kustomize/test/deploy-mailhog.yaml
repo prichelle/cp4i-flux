@@ -1,7 +1,11 @@
 apiVersion: v1
-kind: ConfigMap
+kind: Service
 metadata:
-  name: global-config
-  namespace: default
-data:
-  test: $(CP4I_LICENSE) 
+  name: my-service
+spec:
+  selector:
+    app: $(CP4I_LICENSE)
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8080
