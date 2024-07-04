@@ -13,6 +13,9 @@ spec:
         command: ["/bin/sh", "-c"]
         args:
           - |
-            kubectl get secret ibm-entitlement-key -n default -o yaml | sed 's/default/cp4i/g' | kubectl create -n cp4i -f - 
+            kubectl get secret ibm-entitlement-key -n cp4i || kubectl get secret ibm-entitlement-key -n default -o yaml | sed 's/default/cp4i/g' | kubectl create -n cp4i -f - 
+            kubectl get secret ibm-entitlement-key -n ace || kubectl get secret ibm-entitlement-key -n default -o yaml | sed 's/default/ace/g' | kubectl create -n ace -f - 
+            kubectl get secret ibm-entitlement-key -n apic || kubectl get secret ibm-entitlement-key -n default -o yaml | sed 's/default/apic/g' | kubectl create -n apic -f - 
+            kubectl get secret ibm-entitlement-key -n event || kubectl get secret ibm-entitlement-key -n default -o yaml | sed 's/default/event/g' | kubectl create -n event -f - 
             echo "key created!"
       restartPolicy: Never
