@@ -5,7 +5,7 @@ metadata:
   namespace: default
 spec:
   selector:
-    app: $(CP4I_LICENSE)
+    app: toto
   ports:
     - protocol: TCP
       port: 80
