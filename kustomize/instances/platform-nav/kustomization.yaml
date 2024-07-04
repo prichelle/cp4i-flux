@@ -10,4 +10,4 @@ vars:
       name: global-config
       apiVersion: v1
     fieldref:
-      fieldpath: data.cp4iLicense
+      fieldPath: data.cp4iLicense
