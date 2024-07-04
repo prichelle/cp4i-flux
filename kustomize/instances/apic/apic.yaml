@@ -6,9 +6,9 @@ metadata:
   labels:
     app.kubernetes.io/instance: apiconnect
     app.kubernetes.io/managed-by: ibm-apiconnect
-    app.kubernetes.io/name: apic-min
-  name: apic-min
-  namespace: cp4i
+    app.kubernetes.io/name: apic-demo
+  name: apic-demo
+  namespace: apic
 spec:
   license:
     accept: true
@@ -19,8 +19,8 @@ spec:
 #    governance:
 #      enabled: true
     testAndMonitor:
-      autoTestEnabled: false
-      enabled: false
+      autoTestEnabled: true
+      enabled: true
   imagePullSecrets:
     - ibm-entitlement-key
   gateway:

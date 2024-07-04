@@ -1,0 +1,52 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: ace
+resources: 
+- dashboard.yaml
+- designer.yaml
+- ../../config
+replacements:
+  - source:
+      kind: ConfigMap
+      name: default-config
+      fieldPath: data.ACE_LICENSE
+    targets:
+      - select:
+          kind: Dashboard
+        fieldPaths:
+          - spec.license.license
+      - select:
+          kind: DesignerAuthoring
+        fieldPaths:
+          - spec.license.license
+  - source:
+      kind: ConfigMap
+      name: default-config
+      fieldPath: data.ACE_VERSION
+    targets:
+      - select:
+          kind: Dashboard
+        fieldPaths:
+          - spec.version
+      - select:
+          kind: DesignerAuthoring
+        fieldPaths:
+          - spec.version
+  - source:
+      kind: ConfigMap
+      name: default-config
+      fieldPath: data.STORAGE_RWO
+    targets:
+      - select:
+          kind: DesignerAuthoring
+        fieldPaths:
+          - spec.couchdb.storage.class
+  - source:
+      kind: ConfigMap
+      name: default-config
+      fieldPath: data.STORAGE_RWX
+    targets:
+      - select:
+          kind: Dashboard
+        fieldPaths:
+          - spec.storage.class

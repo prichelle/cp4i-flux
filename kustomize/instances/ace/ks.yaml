@@ -6,16 +6,12 @@ metadata:
 spec:
   dependsOn:
   - name: operator-ibm-integration
-  - name: app-platform-nav
+  - name: inst-platform-nav
   interval: 1h
   retryInterval: 1m
   timeout: 5m
   sourceRef:
     kind: GitRepository
     name: flux-system
-  path: ./kustomize/apps/ibm/app-connect
+  path: ./kustomize/instances/ace
   prune: true
-  # decryption:
-    # provider: sops
-    # secretRef:
-      # name: sops-hcvault

@@ -1,8 +1,8 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
+namespace: apic
 resources: 
-- mq-conf.yaml
-- manager.yaml
+- apic.yaml
 - ../../config
 replacements:
   - source:
@@ -11,15 +11,24 @@ replacements:
       fieldPath: data.CP4I_LICENSE
     targets:
       - select:
-          kind: QueueManager
+          kind: APIConnectCluster
         fieldPaths:
           - spec.license.license
   - source:
       kind: ConfigMap
       name: default-config
-      fieldPath: data.MQ_VERSION
+      fieldPath: data.APIC_VERSION
     targets:
       - select:
-          kind: QueueManager
+          kind: APIConnectCluster
         fieldPaths:
           - spec.version
+  - source:
+      kind: ConfigMap
+      name: default-config
+      fieldPath: data.STORAGE_RWO
+    targets:
+      - select:
+          kind: APIConnectCluster
+        fieldPaths:
+          - spec.storageClassName

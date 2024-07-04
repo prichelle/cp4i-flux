@@ -2,7 +2,7 @@ apiVersion: appconnect.ibm.com/v1beta1
 kind: DesignerAuthoring
 metadata:
   name: ace-designer
-  namespace: cp4i
+  namespace: ace
 spec:
   authentication:
     integrationKeycloak:

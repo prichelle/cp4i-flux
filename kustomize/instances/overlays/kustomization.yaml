@@ -3,4 +3,7 @@ kind: Kustomization
 resources: 
 - ../platform-nav/ks.yaml
 - ../mq/ks.yaml
+- ../ace/ks.yaml
+- ../apic/ks.yaml
+
 

@@ -5,4 +5,24 @@ resources:
 - clrb-admin-sa.yaml
 - sa-admin.yaml
 - job-key.yaml
-- pn-16-1.yaml
+- pn.yaml
+- ../../config
+replacements:
+  - source:
+      kind: ConfigMap
+      name: default-config
+      fieldPath: data.CP4I_LICENSE
+    targets:
+      - select:
+          kind: PlatformNavigator
+        fieldPaths:
+          - spec.license.license
+  - source:
+      kind: ConfigMap
+      name: default-config
+      fieldPath: data.CP4I_VERSION
+    targets:
+      - select:
+          kind: PlatformNavigator
+        fieldPaths:
+          - spec.version
