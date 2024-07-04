@@ -6,7 +6,7 @@ metadata:
 spec:
   license:
     accept: true
-    license: $(CP4I_LICENSE)
+    license: L-JTPV-KYG8TF
     metric: VirtualProcessorCore
     use: NonProduction
   queueManager:
