@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: global-config
+  namespace: default
+data:
+  test: $(CP4I_LICENSE) 
