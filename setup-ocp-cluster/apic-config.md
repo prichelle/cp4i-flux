@@ -63,3 +63,45 @@ spec:
             echo "key created!"
       restartPolicy: Never
 ```
+
+```yaml
+# Create a script file
+cat << 'EOF' > my-script.sh
+#!/bin/bash
+echo "Hello, this is a script stored in a ConfigMap."
+# Add more script content as needed
+EOF
+
+# Create the ConfigMap with the script
+kubectl create configmap my-script-config --from-file=my-script.sh
+```
+
+``` yaml
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: secret-job
+spec:
+  template:
+    spec:
+      containers:
+        - name: curl-container
+          image: curlimages/curl:latest
+          volumeMounts:
+            - name: secret-volume
+              mountPath: /etc/secret
+              readOnly: true
+          command: ["sh", "-c"]
+          args:
+            - |
+              USERNAME=$(cat /etc/secret/username)
+              PASSWORD=$(cat /etc/secret/password)
+              echo "Running curl with secret credentials"
+              curl -u $USERNAME:$PASSWORD https://example.com
+      volumes:
+        - name: secret-volume
+          secret:
+            secretName: my-secret
+      restartPolicy: Never
+  backoffLimit: 1
+  ```
