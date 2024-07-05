@@ -8,8 +8,15 @@ spec:
   - name: operator-ibm-integration
   - name: inst-platform-nav
   interval: 1h
-  retryInterval: 1m
-  timeout: 5m
+  retryInterval: 5m
+  healthChecks:
+  - apiVersion: apiconnect.ibm.com/v1beta1
+    kind: APIConnectCluster
+    name: apic-demo
+    namespace: apic
+    jsonPath: ".status.conditions[?(@.type=='Ready')].status"
+    value: "True"
+  timeout: 30m
   sourceRef:
     kind: GitRepository
     name: flux-system

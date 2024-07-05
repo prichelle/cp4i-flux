@@ -71,7 +71,7 @@ function gen_cloud_at(){
 starting=$(date);
 
 echo "Installing jq"
-apk --no-cache add jq
+yum install -y jq
 echo "Running kubectl command"
 
 mkdir /tmp/script
