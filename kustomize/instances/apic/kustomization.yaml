@@ -8,7 +8,7 @@ replacements:
   - source:
       kind: ConfigMap
       name: default-config
-      fieldPath: data.CP4I_LICENSE
+      fieldPath: data.APIC_LICENSE
     targets:
       - select:
           kind: APIConnectCluster
