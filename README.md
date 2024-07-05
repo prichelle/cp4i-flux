@@ -18,8 +18,11 @@ The possible properties such as the version to use can be adapted in the file ./
 
 ## prereqs
 
-The installation uses flux.
-- Install flux as described at [flux installation](https://fluxcd.io/flux/installation/)
+The installation uses
+- flux: Install flux as described at [flux installation](https://fluxcd.io/flux/installation/)
+- openshift OC cli
+
+You will also need an entitlement key
 
 ## Setup
 
@@ -54,6 +57,11 @@ flux bootstrap github --owner=$GITHUB_USER --repository=$YOUR_REPO --branch=main
 ```
 8. You can pull the update made by flux from your git repo 
 
+A UI (Waeve GitOps) is also installed to visualize the installation.
+The host can be found by looking at the route in the project "flux-system".
+```shell
+kubectl get route "gitops" -o jsonpath="{.spec.host}" -n flux-system
+```
 
 # Flux commands
 
