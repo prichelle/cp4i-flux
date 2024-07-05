@@ -2,9 +2,9 @@ apiVersion: operators.coreos.com/v1alpha1
 kind: Subscription
 metadata:
   name: ibm-appconnect
-  namespace: cp4i
+  namespace: openshift-operators
 spec:
-  channel: v11.4
+  channel: v12.1
   name: ibm-appconnect
   installPlanApproval: Automatic
   source: ibm-operator-catalog

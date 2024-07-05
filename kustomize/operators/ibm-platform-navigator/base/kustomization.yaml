@@ -4,16 +4,23 @@ namespace: openshift-operators
 resources: 
 - license.yaml
 - sub.yaml
-patches:
-- patch: |-
-    - op: replace
-      path: /spec/channel
-      value: v7.3-sc2
-    - op: replace
-      path: /spec/startingCSV
-      value: ibm-integration-platform-navigator.v7.3.0   
-  target:
-    group: operators.coreos.com
-    kind: Subscription
-    name: ibm-integration-platform-navigator
-    version: v1alpha1
+- ../../../config
+replacements:
+  - source:
+      kind: ConfigMap
+      name: default-config
+      fieldPath: data.PN_CHANNEL
+    targets:
+      - select:
+          kind: Subscription
+        fieldPaths:
+          - spec.channel
+  - source:
+      kind: ConfigMap
+      name: default-config
+      fieldPath: data.PN_CSV
+    targets:
+      - select:
+          kind: Subscription
+        fieldPaths:
+          - spec.startingCSV

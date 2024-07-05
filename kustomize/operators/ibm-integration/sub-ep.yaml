@@ -9,4 +9,3 @@ spec:
   name: ibm-eventprocessing
   source: ibm-operator-catalog
   sourceNamespace: openshift-marketplace
-  startingCSV: ibm-eventprocessing.v1.1.4

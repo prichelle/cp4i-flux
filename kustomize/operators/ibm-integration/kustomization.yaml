@@ -8,55 +8,55 @@ resources:
 - sub-apic.yaml
 - sub-es.yaml
 - sub-eem.yaml
-patches:
-- patch: |-
-    - op: replace
-      path: /spec/channel
-      value: v5.2-sc2
-  target:
-    group: operators.coreos.com
-    kind: Subscription
-    name: ibm-apiconnect
-    version: v1alpha1
-- patch: |-
-    - op: replace
-      path: /spec/channel
-      value: v12.1
-    - op: replace
-      path: /spec/startingCSV
-      value: ibm-appconnect.v12.1.1   
-  target:
-    group: operators.coreos.com
-    kind: Subscription
-    name: ibm-appconnect
-    version: v1alpha1
-- patch: |-
-    - op: replace
-      path: /spec/channel
-      value: v3.2-sc2
-    - op: replace
-      path: /spec/startingCSV
-      value: ibm-mq.v3.2.1   
-  target:
-    group: operators.coreos.com
-    kind: Subscription
-    name: ibm-mq
-    version: v1alpha1
-- patch: |-
-    - op: replace
-      path: /spec/channel
-      value: v3.4
-  target:
-    group: operators.coreos.com
-    kind: Subscription
-    name: ibm-eventstreams
-    version: v1alpha1
-- patch: |-
-    - op: replace
-      path: /spec/channel
-      value: v11.2 
-  target:
-    group: operators.coreos.com
-    kind: Subscription
-    name: ibm-eventendpointmanagement
-    version: v1alpha1
+- ../../config
+replacements:
+  - source:
+      kind: ConfigMap
+      name: default-config
+      fieldPath: data.APIC_CHANNEL
+    targets:
+      - select:
+          kind: Subscription
+          name: "ibm-apiconnect"
+        fieldPaths:
+          - spec.channel
+  - source:
+      kind: ConfigMap
+      name: default-config
+      fieldPath: data.ACE_CHANNEL
+    targets:
+      - select:
+          kind: Subscription
+          name: "ibm-appconnect"
+        fieldPaths:
+          - spec.channel
+  - source:
+      kind: ConfigMap
+      name: default-config
+      fieldPath: data.MQ_CHANNEL
+    targets:
+      - select:
+          kind: Subscription
+          name: "ibm-mq"
+        fieldPaths:
+          - spec.channel
+  - source:
+      kind: ConfigMap
+      name: default-config
+      fieldPath: data.ES_CHANNEL
+    targets:
+      - select:
+          kind: Subscription
+          name: "ibm-eventstreams"
+        fieldPaths:
+          - spec.channel
+  - source:
+      kind: ConfigMap
+      name: default-config
+      fieldPath: data.EEM_CHANNEL
+    targets:
+      - select:
+          kind: Subscription
+          name: "ibm-eventendpointmanagement"
+        fieldPaths:
+          - spec.channel

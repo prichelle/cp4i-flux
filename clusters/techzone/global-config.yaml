@@ -1,7 +1,0 @@
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: global-config
-  namespace: flux-system
-data:
-  cp4iLicense: "L-JTPV-KYG8TF"

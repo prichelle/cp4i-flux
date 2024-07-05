@@ -3,16 +3,23 @@ kind: Kustomization
 resources: 
 - sub.yaml
 - ns.yaml
-patches:
-- patch: |-
-    - op: replace
-      path: /spec/channel
-      value: v4.6
-    - op: replace
-      path: /spec/startingCSV
-      value: ibm-common-service-operator.v4.6.3    
-  target:
-    group: operators.coreos.com
-    kind: Subscription
-    name: ibm-common-service-operator
-    version: v1alpha1
+- ../../../config
+replacements:
+  - source:
+      kind: ConfigMap
+      name: default-config
+      fieldPath: data.CMS_CHANNEL
+    targets:
+      - select:
+          kind: Subscription
+        fieldPaths:
+          - spec.channel
+  - source:
+      kind: ConfigMap
+      name: default-config
+      fieldPath: data.CMS_CSV
+    targets:
+      - select:
+          kind: Subscription
+        fieldPaths:
+          - spec.startingCSV
