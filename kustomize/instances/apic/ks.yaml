@@ -14,7 +14,6 @@ spec:
     kind: APIConnectCluster
     name: apic-demo
     namespace: apic
-    jsonPath: ".status.conditions[?(@.type=='Ready')].status"
     value: "True"
   timeout: 30m
   sourceRef:
